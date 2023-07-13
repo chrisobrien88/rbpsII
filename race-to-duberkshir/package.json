@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/react-collapse": "^5.0.1",
+    "eslint-config-prettier": "^8.8.0",
     "postcss-apply": "^0.12.0"
   }
 }
