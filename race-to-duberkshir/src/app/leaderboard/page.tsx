@@ -51,7 +51,7 @@ const Leaderboard: React.FC = async () => {
           {playersSortedByTotalScore?.map((player, index) => {
             return (
               <div key={index}>
-                <PlayerCard player={player} index={index} />
+                <PlayerCard key={index} player={player} index={index} />
               </div>
             );
           })}
