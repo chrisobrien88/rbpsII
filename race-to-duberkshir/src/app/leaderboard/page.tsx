@@ -4,7 +4,6 @@ import PlayerCard from "./PlayerCard2";
 import { useState } from "react";
 
 const Leaderboard: React.FC = async () => {
-  
   const playersScoreCardsData = await getPlayersScoresData();
 
   const playersInfo = playersScoreCardsData?.map((scoreCard) => {
@@ -46,12 +45,15 @@ const Leaderboard: React.FC = async () => {
   return (
     <div>
       <Navbar />
-      
+
       <div className="max-w-xl m-10 px-4 sm:px-6 lg:max-w-4xl lg:px-8">
-      
-        <ul role="list" className="divide-y divide-gray-100">
+        <ul role="list" className="">
           {playersSortedByTotalScore?.map((player, index) => {
-            return <PlayerCard player={player} index={index} />;
+            return (
+              <div key={index}>
+                <PlayerCard player={player} index={index} />
+              </div>
+            );
           })}
         </ul>
       </div>

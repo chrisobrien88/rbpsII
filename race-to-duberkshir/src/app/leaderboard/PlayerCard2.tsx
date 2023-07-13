@@ -20,7 +20,7 @@ interface PlayerCardProps {
 
 const PlayerCard = ({ player, index }: PlayerCardProps) => {
   return (
-    <div className="m-4 p-3 flex flex-row justify-around items-center bg-slate-200 hover:bg-slate-100 rounded-lg hover:rounded-2xl transition-all duration-200 ease-linear cursor-pointer group">
+    <div className="m-4 p-3 flex flex-row justify-around items-center w-300 bg-slate-200 hover:bg-slate-100 rounded-lg hover:rounded-2xl transition-all duration-200 ease-linear cursor-pointer group">
       <p>{index + 1}</p>
       <Image
         src={player.profilePic}
@@ -34,7 +34,7 @@ const PlayerCard = ({ player, index }: PlayerCardProps) => {
       </p>
       <p className="text-slate-700 p-1">{player.totalPoints} pts</p>
 
-      <div className="flex flex-col scale-0 group-hover:scale-100 transition-all duration-100 ease-in">
+      <div className="flex flex-col scale-0 group-hover:scale-100 transition-all duration-300 ease-in">
         <p className="text-slate-500 p-1">{player.handicapIndex} handicap</p>
         <p className="text-slate-500 p-1">
           Rounds played: {player.roundsPlayed}
