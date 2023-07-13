@@ -48,13 +48,12 @@ const Leaderboard: React.FC = async () => {
 
       <div className="max-w-xl m-10 px-4 sm:px-6 lg:max-w-4xl lg:px-8">
         <ul role="list" className="">
-          {playersSortedByTotalScore?.map((player, index) => {
-            return (
+          {playersSortedByTotalScore?.map((player, index) => (
               <div key={index}>
-                <PlayerCard key={index} player={player} index={index} />
+                <PlayerCard player={player} index={index} />
               </div>
-            );
-          })}
+            )
+          )}
         </ul>
       </div>
     </div>
