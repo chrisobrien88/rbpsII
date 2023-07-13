@@ -1,57 +1,62 @@
-import { get } from 'http'
-import { getScoreCardsData } from '../../../api/scoreCardsData'
+import { getPlayersScoresData } from "../../../api/scoreCardsData";
+import Navbar from "../Navbar";
+import PlayerCard from "./PlayerCard2";
+import { useState } from "react";
 
+const Leaderboard: React.FC = async () => {
+  
+  const playersScoreCardsData = await getPlayersScoresData();
 
+  const playersInfo = playersScoreCardsData?.map((scoreCard) => {
+    const [
+      firstName,
+      lastName,
+      handicapIndex,
+      totalPoints,
+      roundsPlayed,
+      allRoundsAverage,
+      bestScore,
+      secondScore,
+      thirdScore,
+      fourthScore,
+      profilePic,
+    ] = scoreCard;
+    // check to see if player has any scores
 
-const Leaderboard = async () => {
-    const scoreCardsData = await getScoreCardsData()
+    return {
+      firstName,
+      lastName,
+      handicapIndex,
+      totalPoints,
+      roundsPlayed,
+      allRoundsAverage,
+      bestScore,
+      secondScore,
+      thirdScore,
+      fourthScore,
+      profilePic,
+    };
+  });
 
-
-    const playersInfo = scoreCardsData?.map((scoreCard) => {
-        const playerName = scoreCard[0]
-        // check to see if player has any scores
-        if (scoreCard[1] === "#N/A") {
-            return {
-                playerName,
-                topThreePlayerScores: [],
-                playerTotalScore: 0
-            }
-        }
-
-        // remove player name from scoreCard
-        scoreCard.shift()
-        // convert scoreCard to numbers
-        const scoreCardNumbers = scoreCard.map((score) => parseInt(score))
-        const playerScores: number[] =  scoreCardNumbers.sort((a, b) => b - a)
-        const topThreePlayerScores = playerScores.slice(0, 3)
-        const playerTotalScore = topThreePlayerScores.reduce((a, b) => a + b, 0)
-
-        return {
-            playerName,
-            topThreePlayerScores,
-            playerTotalScore
-        }
-    })
-
-    const playersSortedByTotalScore = playersInfo?.sort((a, b) => b.playerTotalScore - a.playerTotalScore)
+  playersInfo?.shift();
+  const playersSortedByTotalScore = playersInfo?.sort(
+    (a, b) => b.totalPoints - a.totalPoints
+  );
 
   return (
     <div>
-    <div>Leaderboard</div>
-    <div>
-        {playersSortedByTotalScore?.map((player, index) => {
-            return (
-                <div className='flex flex-row items-center justify-between p-4'>
-                    <div>{index + 1}</div>
-                    <div>{player.playerName}</div>
-                    <div>{player.playerTotalScore}</div>
-                </div>
-            )
-        }
-        )}
+      <Navbar />
+      
+      <div className="max-w-xl m-10 px-4 sm:px-6 lg:max-w-4xl lg:px-8">
+      
+        <ul role="list" className="divide-y divide-gray-100">
+          {playersSortedByTotalScore?.map((player, index) => {
+            return <PlayerCard player={player} index={index} />;
+          })}
+        </ul>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Leaderboard
+export default Leaderboard;

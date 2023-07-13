@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .sidebar-icon {
+    @apply relative flex items-center justify-center h-7 w-7 mt-1 mb-1 mx-auto
+          
+  }
+}
